@@ -1,0 +1,10 @@
+<h1>This is placeholder text</h1>
+
+<% @posts.each do |post| %>
+	<h3><%= link_to post.title, post_path(post) %></h3>
+	<p><%= post.body %></p>
+	<p><%= link_to 'Edit', edit_post_path(post) %></p>
+	<p><%= link_to 'Delete', post_path(post), method: :delete, data: { confirm: "Are you sure?" } %></p>
+<% end %>
+
+<%= render 'footer' %>
