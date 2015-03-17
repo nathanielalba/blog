@@ -1,10 +1,23 @@
-<%= form_for @post do |f| %>
-	
-	<%= f.label :title %>
-	<%= f.text_field :title %>
+<div class="form-for">
+	<%= form_for @post, html: { :multipart => true } do |f| %>
 
-	<%= f.label :body %>
-	<%= f.text_area :body %>
+		<% if @post.errors.any? %>
+		<ul>
+			<% @post.errors.full_messages.each do |msg| %>
+			  <li><%= msg %></li>
+			<% end %>
+		</ul>
+		<% end %>
+		
+		<%= f.label :title %>
+		<%= f.text_field :title, class: "form-control" %>
 
-	<%= f.submit %>
-<% end %>
+		<%= f.label :body %>
+		<%= f.text_area :body, class: "form-control" %>
+
+		<%= f.label :image %>
+		<%= f.file_field :image %>
+
+		<%= f.submit "#{object} post", class: "btn btn-primary" %>
+	<% end %>
+</div>

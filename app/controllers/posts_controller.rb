@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+	before_action :authenticate_user!
 
 	def index
 		@posts = Post.all
@@ -32,7 +33,7 @@ class PostsController < ApplicationController
 
 		if @post.update_attributes(post_params)
 			flash[:success] = "Post was updated"
-			redirect_to @post
+			redirect_to root_url
 		else
 			render 'edit'
 		end
@@ -48,6 +49,6 @@ class PostsController < ApplicationController
 	private
 
 		def post_params
-			params.require(:post).permit(:title, :body)
+			params.require(:post).permit(:title, :body, :image)
 		end
 end
